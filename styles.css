@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Helvetica', sans-serif;
+  line-height: 1.6rem;
+  color: #222;
+}
+
+h1 {
+  text-align: center;
+  margin: 10px auto;
+}
+
+.container {
+  max-width: 600px;
+  padding: 1rem;
+  margin: auto;
+  background-color: #fff;
+  margin-top: 10px;
+  border: solid 2px #000;
+}
+
+.deviceConfig {
+  color: #222;
+  padding: 15px 25px;
+  opacity: 0.8;
+}
+
+label {
+  display: block;
+  color: #333;
+}
+
+fieldset {
+  border: none;
+  padding: 1rem 0;
+  max-width: 500px;
+  margin: auto;
+}
+
+select {
+  margin: 10px 0;
+  width: 100%;
+  min-height: 2em;
+  padding: 0.5rem;
+}
+
+.displayMidi {
+  max-width: 500px;
+  height: 300px;
+  margin: auto;
+  border: 1px solid #000;
+  background-color: #fff;
+  color: #222;
+  overflow: auto;
+}
+
+.displayMidi .dataWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+
+.refTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.5rem;
+}
+
+.displayMidi p {
+  color: #222;
+  margin: 0.3rem 0.5rem;
+  padding: 0 0.3rem;
+}
+
+ #startAudio, #clearMidi {
+   background: #49c1a2;
+   display: block;
+   max-width: 500px;
+   width: 100%;
+   padding: 10px;
+   margin: 10px auto;
+   color: #ffffff;
+   cursor: pointer;
+   opacity: 0.9;
+ }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" async></script>
+  <title>MIDI Monitor</title>
+</head>
+<body>
+  <div class="container">
+    <h1>MIDI Monitor</h1>
+    <div class="deviceConfig">
+      <form id="config">
+        <fieldset>
+          <label for="select">Please select your MIDI device</label>
+          <select name="midiSelector" id="midiSelector">
+            <option value="select-device"> Select Your Input Device</option>
+          </select>
+        </fieldset>
+        <div id="displayMidi" class="displayMidi">
+          <div class="refTitle">
+            <h3>MIDI Data</h3>
+            <h3>Time Intervals</h3>
+          </div>
+          
+        </div>
+      </form>
+    </div>
+    <button id="startAudio">Start Audio</button>
+    <button id="clearMidi">Clear MIDI Monitor</button>
+  </div>
+</body>
+</html>
