@@ -73,7 +73,7 @@ function handleInputs(event) {
 
   // Create HTML element with values and convert to hex
 
-  let nHTML = `${decimalToHex(command)} ${decimalToHex(note)} ${decimalToHex(velocity)}`;
+  let nHTML = `${decimalToHex(command)} ${decimalToHex(note)} ${velocity}`;
 
   document.getElementById('displayMidi').innerHTML += 
   `<div class="dataWrap" id="dataWrap">
