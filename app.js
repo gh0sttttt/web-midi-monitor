@@ -1,6 +1,6 @@
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
-let ctx;
+let ctx = null;
 
 const startAudio = document.getElementById('startAudio');
 const midiDevice = document.getElementById('midiSelector');
@@ -9,19 +9,25 @@ const selector = document.getElementById('midiSelector');
 const midiLog = document.getElementById('displayMidi');
 const oscillators = {};
 
+
 // TO DO
 
+// [COMPLETED] Fix select list so that it removes disconnected devices
+// ---- could be optimized
 // Configure MIDI input device based off user selction 
 // Add connected status for midi input and synth engine 
 // Create a clock drift calculation function
 // implement a dec / hex switch tab
 //  implement a dark mode?
 // midi feedback LED
+//  add note value in midi return 
 
 
 startAudio.addEventListener('click', () => {
   ctx = new AudioContext();
 });
+
+selector.addEventListener("change", deviceSelector);
 
 // convert midi note to audio frequency 
 function midiToFrequency(midi) {
@@ -41,6 +47,11 @@ function success(midiAccess) {
   inputs.forEach(input => {
     input.addEventListener('midimessage', handleInputs);
   });
+
+}
+
+function deviceSelector() {
+   console.log(selector.value);
 }
 
 // listen for midi input
@@ -51,7 +62,7 @@ function handleInputs(event) {
   const timeStamp = event.timeStamp;
 
   // checks if ctx is initialized, if true - midi data is sent to osc
-  if(ctx) {
+  if(ctx != null) {
   switch (command) {
     // note on
     case 144:
@@ -142,14 +153,16 @@ function noteOff(note) {
 }
 
 // listen for device change 
-function deviceChange(event) {
-// console.log(
-  // `Name: ${event.port.name}, Manufacturer: ${event.port.manufacturer}, State: ${event.port.state}, Type: ${event.port.type}`);
-  
+function deviceChange(event) {  
   // create an array that stores device names
   let deviceName = [];
-  if(event.port.type === "input") { 
+
+  if(event.port.state === "connected" && event.port.type === "input") { 
     deviceName.push(`${event.port.name} (${event.port.manufacturer})`);
+  }
+  
+  if (event.port.state === "disconnected") {
+   deviceName = deviceName.filter(device => device !== (`${event.port.name} (${event.port.manufacturer}`));
   }
   
 // loop through the array and create an element. Add the element to selection list
@@ -158,8 +171,21 @@ function deviceChange(event) {
     let element = document.createElement("option");
     element.textContent = option;
     element.value = option;
+    element.className = 'device';
     midiDevice.appendChild(element);
   }
+
+  // loop through array and remove element fromn selection list if device is disconnected
+
+  let options = midiDevice.getElementsByClassName('device');
+    for(let i=0; i<options.length; i++) {
+        if(event.port.state === "disconnected") {
+          midiDevice.removeChild(options[i]);
+            i--; // options have now less element, then decrease i
+        }
+    }
+
+    console.log(event);
 }
 
 function failure() {
